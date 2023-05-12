@@ -1,5 +1,6 @@
 variables:
     TUTOR_PLUGIN: jupyter
+    TUTOR_EXTRA_ENABLED_PLUGINS: mfe
     TUTOR_IMAGES: jupyterhub jupyterlab
     TUTOR_PYPI_PACKAGE: tutor-jupyter
     OPENEDX_RELEASE: olive
