@@ -1,0 +1,11 @@
+jupyterhub:
+    image: {{ JUPYTER_DOCKER_IMAGE_HUB }}
+    environment:
+        JUPYTERHUB_CRYPT_KEY: "{{ JUPYTER_HUB_CRYPT_KEY }}"
+        NETWORK_NAME: "{{ LOCAL_PROJECT_NAME }}_default"
+    volumes:
+        - ../plugins/jupyter/apps/jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py:ro
+        # Spawn Docker containers
+        - /var/run/docker.sock:/var/run/docker.sock
+    depends_on: {{ [("mysql", RUN_MYSQL),]|list_if }}
+    restart: unless-stopped

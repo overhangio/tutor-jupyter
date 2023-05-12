@@ -1,0 +1,7 @@
+jupyterhub-job:
+    image: {{ JUPYTER_DOCKER_IMAGE_HUB }}
+    environment:
+        JUPYTERHUB_CRYPT_KEY: "{{ JUPYTER_HUB_CRYPT_KEY }}"
+    volumes:
+        - ../plugins/jupyter/apps/jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py:ro
+    depends_on: {{ [("mysql", RUN_MYSQL),]|list_if }}

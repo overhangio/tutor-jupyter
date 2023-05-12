@@ -1,0 +1,2 @@
+recursive-include tutorjupyter/patches *
+recursive-include tutorjupyter/templates *

@@ -1,0 +1,3 @@
+{{ JUPYTER_HOST }}{$default_site_port} {
+    import proxy "jupyterhub:9045"
+}

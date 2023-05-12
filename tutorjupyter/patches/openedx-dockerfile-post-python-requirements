@@ -1,0 +1,4 @@
+# Install Jupyter XBlock
+# Remember to bump the version when we upgrade from Olive.
+# https://pypi.org/project/jupyter-xblock/
+RUN pip install "jupyter-xblock>=15.0.0,<16.0.0"

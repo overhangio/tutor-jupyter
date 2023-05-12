@@ -1,0 +1,3 @@
+# Jupyter XBlock
+LTI_DEFAULT_JUPYTER_PASSPORT_ID = "{{ JUPYTER_DEFAULT_PASSPORT_ID }}"
+LTI_DEFAULT_JUPYTER_HUB_URL = "{% if ENABLE_HTTPS %}%https{% else %}http{% endif %}://{{ JUPYTER_HOST }}"
