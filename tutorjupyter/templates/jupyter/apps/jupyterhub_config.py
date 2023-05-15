@@ -90,3 +90,5 @@ c.DockerSpawner.volumes = {"jupyterhub-user-{username}": notebook_dir}
 c.Spawner.cpu_limit = {{ JUPYTER_LAB_CPU_LIMIT }}
 {% endif %}
 c.Spawner.mem_limit = "{{ JUPYTER_LAB_MEMORY_LIMIT }}"
+
+{{ patch("jupyterhub-config") }}
