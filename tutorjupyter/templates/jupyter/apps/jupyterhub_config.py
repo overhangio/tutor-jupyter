@@ -22,20 +22,21 @@ c.JupyterHub.cookie_secret = "{{ JUPYTER_HUB_COOKIE_SECRET }}"
 # Add "*" to allow embedding in all iframes (though it's dangerous and you probably
 # shouldn't do it).
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors
-content_security_policy = "frame-ancestors 'self' "
-content_security_policy += " ".join(
-    [
-        "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}",
-        "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000",
-        "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}",
-        "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}:8001",
-        "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ MFE_HOST }}",
-        "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ MFE_HOST }}:2000",
-        "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ PREVIEW_LMS_HOST }}",
-        "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ PREVIEW_LMS_HOST }}:8000",
-    ]
-)
-content_security_policy += ";"
+frame_ancestors = [
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}",
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000",
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}",
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}:8001",
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ PREVIEW_LMS_HOST }}",
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ PREVIEW_LMS_HOST }}:8000",
+]
+{% if MFE_HOST is defined %}
+frame_ancestors += [
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ MFE_HOST }}",
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ MFE_HOST }}:2000",
+]
+{% endif %}
+content_security_policy = "frame-ancestors 'self' " + " ".join(frame_ancestors) + ";"
 c.JupyterHub.tornado_settings = {
     "headers": {"Content-Security-Policy": content_security_policy}
 }
