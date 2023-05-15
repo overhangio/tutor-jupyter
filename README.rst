@@ -20,16 +20,38 @@ Installation
 Usage
 -----
 
-Launch a local platform ::
+Enable the plugin::
 
-    tutor plugins enable jupyter mfe
+    tutor plugins enable jupyter
+
+Update your environment::
+
     tutor config save
+
+Re-build the "openedx" Docker image to install the Jupyter XBlock::
+
     tutor images build openedx
+
+Launch your platform again::
+
     tutor local launch
 
-TODO Create LTI passport in Open edX::
+Print the default passport ID::
 
     echo "$(tutor config printvalue JUPYTER_DEFAULT_PASSPORT_ID):$(tutor config printvalue JUPYTER_LTI_CLIENT_KEY):$(tutor config printvalue JUPYTER_LTI_CLIENT_SECRET)"
+
+Make a note of the printed value. Go to the Studio Tools ➡️ Advanced Settings ➡️ LTI Passports. Insert the passport value.
+
+In "Advanced Module List" add "jupyter" (with quotes)::
+
+![jupyter xblock advanced settings](https://raw.githubusercontent.com/overhangio/jupyter-xblock/main/static/screenshots/studio-advanced-settings.png)
+
+You should then be able to create an advanced Jupyter XBlock in the Studio:
+
+> Add New Component ➡️ Advanced ➡️ Jupyter notebook
+
+The default `"hello" <https://github.com/overhangio/jupyter-xblock/blob/main/static/notebooks/hello.ipynb>`__  notebook will be pulled from the jupyter-block repository and displayed in the studio.
+
 
 Configuration
 -------------
@@ -37,7 +59,9 @@ Configuration
 Settings
 ~~~~~~~~
 
-TODO
+This plugin has the following Tutor settings. Each setting can be printed with ``tutor config printvalue JUPYTER_SETTING_NAME`` and modified with ``tutor config save --set JUPYTER_SETTING_NAME=value``.
+
+Default settings:
 
 - JUPYTER_DOCKER_IMAGE_HUB (default: ``"{{ DOCKER_REGISTRY }}overhangio/jupyterhub:{{ JUPYTER_VERSION }}"``)
 - JUPYTER_DOCKER_IMAGE_LAB (default: ``"{{ DOCKER_REGISTRY }}overhangio/jupyterlab:{{ JUPYTER_VERSION }}"``)
@@ -46,18 +70,37 @@ TODO
 - JUPYTER_LTI_CLIENT_KEY (default: ``"openedx"``)
 - JUPYTER_HUB_MYSQL_DATABASE (default: ``"jupyterhub"``)
 - JUPYTER_HUB_MYSQL_USERNAME (default: ``"jupyterhub"``)
-- JUPYTER_LAB_CPU_LIMIT", None
+- JUPYTER_LAB_CPU_LIMIT (default: ``None``)
 - JUPYTER_LAB_MEMORY_LIMIT (default: ``"200M"``)
+
+Unique, user-specific settings:
 
 - JUPYTER_HUB_COOKIE_SECRET (default: ``"{{ 32|jupyterhub_crypt_key }}"``)
 - JUPYTER_HUB_CRYPT_KEY (default: ``"{{ 32|jupyterhub_crypt_key }}"``)
 - JUPYTER_HUB_MYSQL_PASSWORD (default: ``"{{ 24|random_string }}"``)
 - JUPYTER_LTI_CLIENT_SECRET (default: ``"{{ 24|random_string }}"``)
 
-Modifying the default lab environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+JupyterHub
+~~~~~~~~~~
 
-TODO implement "jupyter-lab-dockerfile" patch::
+The configuration template for the JupyterHub instance is stored in `jupyterhub_config.py <./tutorjupyter/templates/jupyter/apps/jupyterhub_config.py>`__. This template file includes a ``{{ patch("jupyterhub-config") }}`` statement, which means that its contents can be overridden by creating an ad-hoc Tutor plugin. For instance, to add custom LTI keys to your JupyterHub instance::
+
+    from tutor import hooks
+
+    hooks.Filters.ENV_PATCHES.add_item(
+        (
+            "jupyterhub-config",
+            """
+    # Add LTI keys to the authenticator
+    c.LTI11Authenticator.consumers["my-lti-key"] = "my-lti-secret"
+    """
+        )
+    )
+
+Lab environment
+~~~~~~~~~~~~~~~
+
+By default, Jupyter lab notebooks will be spawned that do not include extra Python packages or dependencies. To modify the "jupyterlab" Docker image and add extra Python packages (for example), you should create a Tutor plugin that implements the "jupyter-lab-dockerfile" patch::
 
     from tutor import hooks
 
@@ -75,6 +118,8 @@ Then build the lab image again::
 
     tutor config save
     tutor images build jupyterlab
+
+You should now be able to run ``import matplotlib`` statements within your Jupyter notebooks.
 
 License
 -------
