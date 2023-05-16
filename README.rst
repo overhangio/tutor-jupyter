@@ -15,7 +15,7 @@ Installation
 
 ::
 
-    pip install tutor-jupyter
+    tutor plugins install jupyter
 
 Usage
 -----
