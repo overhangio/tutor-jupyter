@@ -40,11 +40,16 @@ Print the default passport ID::
 
     echo "$(tutor config printvalue JUPYTER_DEFAULT_PASSPORT_ID):$(tutor config printvalue JUPYTER_LTI_CLIENT_KEY):$(tutor config printvalue JUPYTER_LTI_CLIENT_SECRET)"
 
-Make a note of the printed value. Go to the Studio Tools ➡️ Advanced Settings ➡️ LTI Passports. Insert the passport value.
+Make a note of the printed value. Go to the Studio Tools ➡️ Advanced Settings ➡️ LTI Passports. Insert the passport value:
+
+.. image:: https://raw.githubusercontent.com/overhangio/jupyter-xblock/main/static/screenshots/studio-advanced-settings-lti.png
+     :alt: Studio advanced settings
+
 
 In "Advanced Module List" add "jupyter" (with quotes):
 
-![jupyter xblock advanced settings](https://raw.githubusercontent.com/overhangio/jupyter-xblock/main/static/screenshots/studio-advanced-settings.png)
+.. image:: https://raw.githubusercontent.com/overhangio/jupyter-xblock/main/static/screenshots/studio-advanced-settings.png
+     :alt: Studio advanced settings
 
 You should then be able to create an advanced Jupyter XBlock in the Studio:
 
