@@ -1,4 +1,4 @@
-i# Changelog
+# Changelog
 
 This file includes a history of past releases. Changes that were not yet added to a release are in the [changelog.d/](./changelog.d) folder.
 
@@ -18,4 +18,10 @@ instructions, because git commits are used to generate release notes:
 -->
 
 <!-- scriv-insert-here -->
+
+<a id='changelog-15.0.1'></a>
+## v15.0.1 (2023-05-22)
+
+- [Improvement] Add a scriv-compliant changelog. (by @regisb)
+- [Feature] upgrade jupyter-xblock to 15.0.3. (by @regisb)
 
