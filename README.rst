@@ -42,7 +42,7 @@ Print the default passport ID::
 
 Make a note of the printed value. Go to the Studio Tools ➡️ Advanced Settings ➡️ LTI Passports. Insert the passport value.
 
-In "Advanced Module List" add "jupyter" (with quotes)::
+In "Advanced Module List" add "jupyter" (with quotes):
 
 ![jupyter xblock advanced settings](https://raw.githubusercontent.com/overhangio/jupyter-xblock/main/static/screenshots/studio-advanced-settings.png)
 
