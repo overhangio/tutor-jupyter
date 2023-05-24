@@ -19,6 +19,11 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-15.0.2'></a>
+## v15.0.2 (2023-05-24)
+
+- [Improvement] Upgrade JupyterHub to 4.0.0. This is possible now that [this ltiauthenticator issue](https://github.com/jupyterhub/ltiauthenticator/issues/157) is resolved. (by @regisb)
+
 <a id='changelog-15.0.1'></a>
 ## v15.0.1 (2023-05-22)
 
