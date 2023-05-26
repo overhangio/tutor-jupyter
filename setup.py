@@ -26,7 +26,7 @@ ABOUT = load_about()
 
 setup(
     name="tutor-jupyter",
-    version=ABOUT["__version__"],
+    version=ABOUT["__package_version__"],
     url="https://github.com/overhangio/tutor-jupyter",
     project_urls={
         "Code": "https://github.com/overhangio/tutor-jupyter",
