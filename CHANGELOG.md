@@ -19,6 +19,11 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-16.0.0'></a>
+## v16.0.0 (2023-06-15)
+
+- 💥[Feature] Upgrade to Palm. (by @regisb)
+
 <a id='changelog-15.0.2'></a>
 ## v15.0.2 (2023-05-24)
 
