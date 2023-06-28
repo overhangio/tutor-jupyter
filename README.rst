@@ -8,7 +8,7 @@ This is a plugin for Tutor that makes it easy to integrate `Jupyter <https://jup
 
 In pratice, it means that students will be allocated Docker containers with limited CPU and memory to run their custom notebooks.
 
-⚠️ This plugin is not compatible with Kubernetes. If you wish to run JupyterHub on Kubernetes, you are encouraged to check the documentation of the `Zero to JupyterHub with Kubernetes <https://z2jh.jupyter.org/en/stable/resources/reference.html>`__ project.
+⚠️ Compatibility with Kubernetes was not battle-tested. Please report any issue you face. For a more production-ready Kubernetes environment, you are encouraged to check the documentation of the `Zero to JupyterHub with Kubernetes <https://z2jh.jupyter.org/en/stable/resources/reference.html>`__ project.
 
 Installation
 ------------

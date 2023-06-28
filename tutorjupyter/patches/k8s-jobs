@@ -1,0 +1,24 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jupyterhub-job
+  labels:
+    app.kubernetes.io/component: job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: jupyterhub
+          image: {{ JUPYTER_DOCKER_IMAGE_HUB }}
+          env:
+            - name: JUPYTERHUB_CRYPT_KEY
+              value: "{{ JUPYTER_HUB_CRYPT_KEY }}"
+          volumeMounts:
+            - mountPath: /srv/jupyterhub/
+              name: config
+      volumes:
+        - name: config
+          configMap:
+            name: jupyterhub-config

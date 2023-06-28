@@ -1,0 +1,6 @@
+- name: jupyterhub-config
+  files:
+    - plugins/jupyter/apps/jupyterhub_config.py
+  options:
+    labels:
+        app.kubernetes.io/name: jupyterhub

@@ -17,6 +17,8 @@ c.JupyterHub.hub_port = 8081
 # Database
 c.JupyterHub.db_url = "mysql+pymysql://{{ JUPYTER_HUB_MYSQL_USERNAME }}:{{ JUPYTER_HUB_MYSQL_PASSWORD }}@{{ MYSQL_HOST }}:{{ MYSQL_PORT }}/{{ JUPYTER_HUB_MYSQL_DATABASE }}"
 c.JupyterHub.cookie_secret = "{{ JUPYTER_HUB_COOKIE_SECRET }}"
+# Don't write pid file to current folder, where we may not have write access
+c.ConfigurableHTTPProxy.pid_file = "/tmp/jupyter-proxy.pid"
 
 # Authorise embedding in some iframes.
 # Add "*" to allow embedding in all iframes (though it's dangerous and you probably
@@ -69,26 +71,38 @@ c.LTI11Authenticator.username_key = "lis_person_sourcedid"
 c.ServerApp.nbserver_extensions = {"nbgitpuller": True}
 
 # Spawner
-
-# Run as Docker containers
-# https://jupyterhub-dockerspawner.readthedocs.io/en/latest/api/index.html
-c.JupyterHub.spawner_class = "dockerspawner.DockerSpawner"
-c.DockerSpawner.image = "{{ JUPYTER_DOCKER_IMAGE_LAB }}"
-c.DockerSpawner.debug = True
-c.DockerSpawner.remove = True
-c.DockerSpawner.use_internal_ip = True
-c.DockerSpawner.network_name = os.environ.get("NETWORK_NAME")
-c.DockerSpawner.environment = {"CONTENT_SECURITY_POLICY": content_security_policy}
-# Persist user data: this will create a new "jupyterhub-user-{username}" named volume on
-# the host for every Docker container.
-# https://jupyterhub-dockerspawner.readthedocs.io/en/latest/data-persistence.html
-notebook_dir = "/home/jovyan/work"
-c.DockerSpawner.notebook_dir = notebook_dir
-c.DockerSpawner.volumes = {"jupyterhub-user-{username}": notebook_dir}
 # Limit spawner cpu and memory
 {% if JUPYTER_LAB_CPU_LIMIT %}
 c.Spawner.cpu_limit = {{ JUPYTER_LAB_CPU_LIMIT }}
 {% endif %}
 c.Spawner.mem_limit = "{{ JUPYTER_LAB_MEMORY_LIMIT }}"
+
+if os.environ.get("SPAWNER") == "docker":
+    # Run as Docker containers
+    # https://jupyterhub-dockerspawner.readthedocs.io/en/latest/api/index.html
+    c.JupyterHub.spawner_class = "dockerspawner.DockerSpawner"
+    c.DockerSpawner.image = "{{ JUPYTER_DOCKER_IMAGE_LAB }}"
+    c.DockerSpawner.debug = True
+    c.DockerSpawner.remove = True
+    c.DockerSpawner.use_internal_ip = True
+    c.DockerSpawner.network_name = os.environ.get("NETWORK_NAME")
+    c.DockerSpawner.environment = {"CONTENT_SECURITY_POLICY": content_security_policy}
+    # Persist user data: this will create a new "jupyterhub-user-{username}" named volume on
+    # the host for every Docker container.
+    # https://jupyterhub-dockerspawner.readthedocs.io/en/latest/data-persistence.html
+    c.DockerSpawner.notebook_dir = "/home/jovyan/work"
+    c.DockerSpawner.volumes = {"jupyterhub-user-{username}": c.DockerSpawner.notebook_dir}
+elif os.environ.get("SPAWNER") == "kubernetes":
+    # Run as kubernetes pods
+    # https://jupyterhub-kubespawner.readthedocs.io/en/latest/spawner.html
+    # https://z2jh.jupyter.org/en/stable/resources/reference.html#helm-chart-configuration-reference
+    # spoiler: you're in for one hell of a ride...
+    c.JupyterHub.spawner_class = "kubespawner.KubeSpawner"
+    c.KubeSpawner.debug = True
+    c.KubeSpawner.hub_connect_url = "http://jupyterhub:8081"
+    # c.KubeSpawner.port = 8081
+    c.KubeSpawner.service_account = "jupyterhub"
+    c.KubeSpawner.image = "{{ JUPYTER_DOCKER_IMAGE_LAB }}"
+    c.KubeSpawner.environment = {"CONTENT_SECURITY_POLICY": content_security_policy}
 
 {{ patch("jupyterhub-config") }}
