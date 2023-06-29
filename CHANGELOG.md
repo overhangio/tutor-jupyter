@@ -19,6 +19,11 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-16.0.1'></a>
+## v16.0.1 (2023-06-29)
+
+- [Feature] Run JupyterHub on Kubernetes. This is an alpha feature. Feedback is welcome! (by @regisb)
+
 <a id='changelog-16.0.0'></a>
 ## v16.0.0 (2023-06-15)
 
