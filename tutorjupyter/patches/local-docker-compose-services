@@ -3,6 +3,7 @@ jupyterhub:
     environment:
         JUPYTERHUB_CRYPT_KEY: "{{ JUPYTER_HUB_CRYPT_KEY }}"
         NETWORK_NAME: "{{ LOCAL_PROJECT_NAME }}_default"
+        SPAWNER: "docker"
     volumes:
         - ../plugins/jupyter/apps/jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py:ro
         # Spawn Docker containers
