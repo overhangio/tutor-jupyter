@@ -126,6 +126,11 @@ Then build the lab image again::
 
 You should now be able to run ``import matplotlib`` statements within your Jupyter notebooks.
 
+Troubleshooting
+---------------
+
+This Tutor plugin is maintained by Muhammad Hassan Siddiqi from `Edly <https://edly.io>`__. Community support is available from the official `Open edX forum <https://discuss.openedx.org>`__. Do you need help with this plugin? See the `troubleshooting <https://docs.tutor.overhang.io/troubleshooting.html>`__ section from the Tutor documentation.
+
 License
 -------
 
