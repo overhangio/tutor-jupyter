@@ -1,4 +1,4 @@
-Jupyter Notebook plugin for `Tutor <https://docs.tutor.overhang.io>`__
+Jupyter Notebook plugin for `Tutor <https://docs.tutor.edly.io>`__
 ======================================================================
 
 This is a plugin for Tutor that makes it easy to integrate `Jupyter <https://jupyter.org/>`__ notebooks in `Open edX <https://openedx.org>`__. It achieves the following:
@@ -129,7 +129,7 @@ You should now be able to run ``import matplotlib`` statements within your Jupyt
 Troubleshooting
 ---------------
 
-This Tutor plugin is maintained by Muhammad Hassan Siddiqi from `Edly <https://edly.io>`__. Community support is available from the official `Open edX forum <https://discuss.openedx.org>`__. Do you need help with this plugin? See the `troubleshooting <https://docs.tutor.overhang.io/troubleshooting.html>`__ section from the Tutor documentation.
+This Tutor plugin is maintained by Muhammad Hassan Siddiqi from `Edly <https://edly.io>`__. Community support is available from the official `Open edX forum <https://discuss.openedx.org>`__. Do you need help with this plugin? See the `troubleshooting <https://docs.tutor.edly.io/troubleshooting.html>`__ section from the Tutor documentation.
 
 License
 -------
