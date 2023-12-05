@@ -24,10 +24,6 @@ Enable the plugin::
 
     tutor plugins enable jupyter
 
-Update your environment::
-
-    tutor config save
-
 Re-build the "openedx" Docker image to install the Jupyter XBlock::
 
     tutor images build openedx

@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/jupyterhub/singleuser/tags
-FROM docker.io/jupyterhub/singleuser:4.0.0
+FROM docker.io/jupyterhub/singleuser:4
 
 # Install git for nbgitpuller
 USER root
@@ -11,10 +11,10 @@ USER jovyan
 # https://github.com/jupyterhub/nbgitpuller
 # https://hub.jupyter.org/nbgitpuller/
 # https://pypi.org/project/nbgitpuller/
-RUN pip install nbgitpuller==1.1.1
+RUN pip install nbgitpuller==1.2.0
 
 # https://pypi.org/project/jupyterlab/
-RUN pip install jupyterlab==3.6.3
+RUN pip install jupyterlab==4.0.9
 
 {{ patch("jupyter-lab-dockerfile") }}
 
