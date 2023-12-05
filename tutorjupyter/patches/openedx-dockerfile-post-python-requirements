@@ -1,4 +1,4 @@
 # Install Jupyter XBlock
-# Remember to bump the version when we upgrade from Palm.
+# Remember to bump the version when we upgrade from Quince.
 # https://pypi.org/project/jupyter-xblock/
 RUN pip install "jupyter-xblock>=16.0.0,<17.0.0"
