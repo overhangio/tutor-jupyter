@@ -3,6 +3,7 @@ from __future__ import annotations
 import codecs
 import os
 import os.path
+import typing as t
 from glob import glob
 from secrets import token_bytes
 
@@ -20,35 +21,33 @@ if __version_suffix__:
 # CONFIGURATION
 ########################################
 
+config: t.Dict[str, t.Dict[str, t.Any]] = {
+    "defaults": {
+        "VERSION": __version__,
+        "DOCKER_IMAGE_HUB": "{{ DOCKER_REGISTRY }}overhangio/jupyterhub:{{ JUPYTER_VERSION }}",
+        "DOCKER_IMAGE_LAB": "{{ DOCKER_REGISTRY }}overhangio/jupyterlab:{{ JUPYTER_VERSION }}",
+        "HOST": "jupyter.{{ LMS_HOST }}",
+        "DEFAULT_PASSPORT_ID": "jupyterhub",
+        "LTI_CLIENT_KEY": "openedx",
+        "HUB_MYSQL_DATABASE": "jupyterhub",
+        "HUB_MYSQL_USERNAME": "jupyterhub",
+        "LAB_CPU_LIMIT": None,
+        "LAB_MEMORY_LIMIT": "200M",
+    },
+    "unique": {
+        "HUB_COOKIE_SECRET": "{{ 32|jupyterhub_crypt_key }}",
+        "HUB_CRYPT_KEY": "{{ 32|jupyterhub_crypt_key }}",
+        "HUB_MYSQL_PASSWORD": "{{ 24|random_string }}",
+        "LTI_CLIENT_SECRET": "{{ 24|random_string }}",
+    },
+}
 hooks.Filters.CONFIG_DEFAULTS.add_items(
-    [
-        ("JUPYTER_VERSION", __version__),
-        (
-            "JUPYTER_DOCKER_IMAGE_HUB",
-            "{{ DOCKER_REGISTRY }}overhangio/jupyterhub:{{ JUPYTER_VERSION }}",
-        ),
-        (
-            "JUPYTER_DOCKER_IMAGE_LAB",
-            "{{ DOCKER_REGISTRY }}overhangio/jupyterlab:{{ JUPYTER_VERSION }}",
-        ),
-        ("JUPYTER_HOST", "jupyter.{{ LMS_HOST }}"),
-        ("JUPYTER_DEFAULT_PASSPORT_ID", "jupyterhub"),
-        ("JUPYTER_LTI_CLIENT_KEY", "openedx"),
-        ("JUPYTER_HUB_MYSQL_DATABASE", "jupyterhub"),
-        ("JUPYTER_HUB_MYSQL_USERNAME", "jupyterhub"),
-        ("JUPYTER_LAB_CPU_LIMIT", None),
-        ("JUPYTER_LAB_MEMORY_LIMIT", "200M"),
-    ]
+    [(f"JUPYTER_{key}", value) for key, value in config.get("defaults", {}).items()]
 )
-
 hooks.Filters.CONFIG_UNIQUE.add_items(
-    [
-        ("JUPYTER_HUB_COOKIE_SECRET", "{{ 32|jupyterhub_crypt_key }}"),
-        ("JUPYTER_HUB_CRYPT_KEY", "{{ 32|jupyterhub_crypt_key }}"),
-        ("JUPYTER_HUB_MYSQL_PASSWORD", "{{ 24|random_string }}"),
-        ("JUPYTER_LTI_CLIENT_SECRET", "{{ 24|random_string }}"),
-    ]
+    [(f"JUPYTER_{key}", value) for key, value in config.get("unique", {}).items()]
 )
+hooks.Filters.CONFIG_OVERRIDES.add_items(list(config.get("overrides", {}).items()))
 
 
 def jupyterhub_crypt_key(size: int) -> str:
@@ -84,7 +83,6 @@ for service, template_path in MY_INIT_TASKS:
 ########################################
 # DOCKER IMAGE MANAGEMENT
 ########################################
-
 
 hooks.Filters.IMAGES_BUILD.add_items(
     [
@@ -133,7 +131,6 @@ hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
         ("jupyter/apps", "plugins"),
     ],
 )
-
 
 ########################################
 # PATCH LOADING
