@@ -21,6 +21,12 @@ format: ## Format code automatically
 isort: ##  Sort imports. This target is not mandatory because the output may be incompatible with black formatting. Provided for convenience purposes.
 	isort --skip=templates ${SRC_DIRS}
 
+changelog-entry: ## Create a new changelog entry.
+	scriv create
+
+changelog: ## Collect changelog entries in the CHANGELOG.md file.
+	scriv collect
+
 ESCAPE = 
 help: ## Print this help
 	@grep -E '^([a-zA-Z_-]+:.*?## .*|######* .+)$$' Makefile \
