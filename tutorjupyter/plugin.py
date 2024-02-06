@@ -7,7 +7,7 @@ import typing as t
 from glob import glob
 from secrets import token_bytes
 
-import pkg_resources
+import importlib_resources
 from tutor import hooks
 from tutor.__about__ import __version_suffix__
 
@@ -66,14 +66,14 @@ hooks.Filters.ENV_TEMPLATE_FILTERS.add_item(
 # INITIALIZATION TASKS
 ########################################
 
-MY_INIT_TASKS: list[tuple[str, tuple[str, ...]]] = [
-    ("mysql", ("jupyter", "jobs", "init", "mysql.sh")),
-    ("jupyterhub", ("jupyter", "jobs", "init", "jupyterhub.sh")),
-]
-
-for service, template_path in MY_INIT_TASKS:
-    full_path: str = pkg_resources.resource_filename(
-        "tutorjupyter", os.path.join("templates", *template_path)
+for service in ["mysql", "jupyterhub"]:
+    full_path: str = str(
+        importlib_resources.files("tutorjupyter")
+        / "templates"
+        / "jupyter"
+        / "tasks"
+        / service
+        / "init"
     )
     with open(full_path, encoding="utf-8") as init_task_file:
         init_task: str = init_task_file.read()
@@ -118,11 +118,9 @@ hooks.Filters.IMAGES_PUSH.add_items(
 # TEMPLATE RENDERING
 ########################################
 
-hooks.Filters.ENV_TEMPLATE_ROOTS.add_items(
-    # Root paths for template files, relative to the project root.
-    [
-        pkg_resources.resource_filename("tutorjupyter", "templates"),
-    ]
+hooks.Filters.ENV_TEMPLATE_ROOTS.add_item(
+    # Root path for template files, relative to the project root.
+    str(importlib_resources.files("tutorjupyter") / "templates")
 )
 
 hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
@@ -138,11 +136,6 @@ hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
 
 # For each file in tutorjupyter/patches,
 # apply a patch based on the file's name and contents.
-for path in glob(
-    os.path.join(
-        pkg_resources.resource_filename("tutorjupyter", "patches"),
-        "*",
-    )
-):
+for path in glob(str(importlib_resources.files("tutorjupyter") / "patches" / "*")):
     with open(path, encoding="utf-8") as patch_file:
         hooks.Filters.ENV_PATCHES.add_item((os.path.basename(path), patch_file.read()))
