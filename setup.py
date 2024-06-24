@@ -35,7 +35,7 @@ setup(
     license="AGPLv3",
     author="Overhang.IO",
     maintainer="Edly",
-    maintainer_email="mhassan.eeng@gmail.com",
+    maintainer_email="abdul.muqadim@arbisoft.com",
     description="Jupyter Notebook plugin for Tutor",
     long_description=load_readme(),
     packages=find_packages(exclude=["tests*"]),
