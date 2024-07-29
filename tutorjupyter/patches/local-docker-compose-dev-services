@@ -1,0 +1,8 @@
+jupyterhub:
+  command: jupyterhub --port=9045
+  ports:
+    - "9045:9045"
+  stdin_open: true
+  tty: true
+  environment:
+    NETWORK_NAME: "{{ DEV_PROJECT_NAME }}_default"
