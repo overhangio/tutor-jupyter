@@ -1,3 +1,0 @@
-jupyterhub:
-    environment:
-        NETWORK_NAME: "{{ DEV_PROJECT_NAME }}_default"
