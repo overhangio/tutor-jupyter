@@ -19,6 +19,11 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-18.1.0'></a>
+## v18.1.0 (2024-09-15)
+
+- 💥[Feature] Make the plugin work in development mode by adding `openedx-development-settings`. (by @Abdul-Muqadim-Arbisoft)
+
 <a id='changelog-18.0.0'></a>
 ## v18.0.0 (2024-06-20)
 
