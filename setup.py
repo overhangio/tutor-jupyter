@@ -33,7 +33,7 @@ setup(
         "Issue tracker": "https://github.com/overhangio/tutor-jupyter/issues",
     },
     license="AGPLv3",
-    author="Overhang.IO",
+    author="Edly",
     maintainer="Edly",
     maintainer_email="abdul.muqadim@arbisoft.com",
     description="Jupyter Notebook plugin for Tutor",
