@@ -12,4 +12,6 @@ RUN pip install \
     jupyterhub-ltiauthenticator==1.6.1 \
     pymysql==1.1.0
 
+{{ patch("jupyter-hub-dockerfile") }}
+
 CMD ["jupyterhub"]
