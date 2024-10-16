@@ -98,6 +98,26 @@ The configuration template for the JupyterHub instance is stored in `jupyterhub_
         )
     )
 
+To modify the "jupyterhub" Docker image and add extra Python packages (for example), you should create a Tutor plugin that implements the "jupyter-hub-dockerfile" patch:::
+
+    from tutor import hooks
+
+    hooks.Filters.ENV_PATCHES.add_item(
+        (
+            "jupyter-hub-dockerfile",
+            """
+    # Install extra Python packages
+    RUN pip install jupyterhub-idle-culler
+    """
+        )
+    )
+
+Then build the JupyterHub image again::
+
+    tutor config save
+    tutor images build jupyterhub
+
+
 Lab environment
 ~~~~~~~~~~~~~~~
 
