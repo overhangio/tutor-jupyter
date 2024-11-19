@@ -130,4 +130,4 @@ This Tutor plugin is maintained by Abdul-Muqadim from `Edly <https://edly.io>`__
 License
 -------
 
-This software is licensed under the terms of the `AGPLv3 <https://www.gnu.org/licenses/agpl-3.0.en.html>`__.
+This work is licensed under the terms of the `GNU Affero General Public License (AGPL) <https://github.com/overhangio/tutor-jupyter/blob/release/LICENSE.txt>`_.
