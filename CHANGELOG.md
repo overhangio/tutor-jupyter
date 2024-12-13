@@ -19,6 +19,11 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-18.2.0'></a>
+## v18.2.0 (2024-10-16)
+
+- 💥[Feature] Add `jupyter-hub-dockerfile` patch to JupyterHub Dockerfile for customization (by @noeleont)
+
 <a id='changelog-18.1.0'></a>
 ## v18.1.0 (2024-09-15)
 
