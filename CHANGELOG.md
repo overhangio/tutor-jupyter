@@ -19,6 +19,11 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-19.0.0'></a>
+## v19.0.0 (2024-12-16)
+
+- 💥[Feature] Upgrade to Sumac (by @Abdul-Muqadim-Arbisoft)
+
 <a id='changelog-18.1.1'></a>
 ## v18.1.1 (2024-12-16)
 
