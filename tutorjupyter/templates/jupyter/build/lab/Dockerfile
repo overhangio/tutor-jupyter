@@ -16,7 +16,7 @@ RUN pip install nbgitpuller==1.2.0
 # https://pypi.org/project/jupyterlab/
 RUN pip install jupyterlab==4.0.9
 
-{{ patch("jupyter-lab-dockerfile") }}
+{{ patch("jupyterlab-dockerfile") }}
 
 # Disable obnoxious jupyterlab announcements
 # https://jupyterlab.readthedocs.io/en/stable/user/announcements.html
