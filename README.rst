@@ -98,16 +98,35 @@ The configuration template for the JupyterHub instance is stored in `jupyterhub_
         )
     )
 
-Lab environment
-~~~~~~~~~~~~~~~
-
-By default, Jupyter lab notebooks will be spawned that do not include extra Python packages or dependencies. To modify the "jupyterlab" Docker image and add extra Python packages (for example), you should create a Tutor plugin that implements the "jupyter-lab-dockerfile" patch::
+To modify the "jupyterhub" Docker image and add extra Python packages (for example), you should create a Tutor plugin that implements the "jupyterhub-dockerfile" patch::
 
     from tutor import hooks
 
     hooks.Filters.ENV_PATCHES.add_item(
         (
-            "jupyter-lab-dockerfile",
+            "jupyterhub-dockerfile",
+            """
+    # Install extra Python packages
+    RUN pip install jupyterhub-idle-culler
+    """
+        )
+    )
+
+Then build the JupyterHub image again::
+
+    tutor config save
+    tutor images build jupyterhub
+
+Lab environment
+~~~~~~~~~~~~~~~
+
+By default, Jupyter lab notebooks will be spawned that do not include extra Python packages or dependencies. To modify the "jupyterlab" Docker image and add extra Python packages (for example), you should create a Tutor plugin that implements the "jupyterlab-dockerfile" patch::
+
+    from tutor import hooks
+
+    hooks.Filters.ENV_PATCHES.add_item(
+        (
+            "jupyterlab-dockerfile",
             """
     # Install extra Python packages
     RUN pip install matplotlib scipy seaborn
