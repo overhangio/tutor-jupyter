@@ -98,7 +98,7 @@ The configuration template for the JupyterHub instance is stored in `jupyterhub_
         )
     )
 
-To modify the "jupyterhub" Docker image and add extra Python packages (for example), you should create a Tutor plugin that implements the "jupyterhub-dockerfile" patch:::
+To modify the "jupyterhub" Docker image and add extra Python packages (for example), you should create a Tutor plugin that implements the "jupyterhub-dockerfile" patch::
 
     from tutor import hooks
 
