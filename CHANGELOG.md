@@ -20,7 +20,7 @@ instructions, because git commits are used to generate release notes:
 <!-- scriv-insert-here -->
 
 <a id='changelog-20.0.0'></a>
-## v20.0.0 (2025-04-06)
+## v20.0.0 (2025-06-10)
 
 - 💥[Feature] Renamed the `jupyter-lab-dockerfile` to `jupyterlab-dockerfile` for consistency across the Tutor ecosystem and added the `jupyterhub-dockerfile` patch to the JupyterHub Dockerfile for customization. If you were previously using the patch with the old name, update your configuration to reflect the new name to ensure compatibility. (by @Abdul-Muqadim-Arbisoft)
 
