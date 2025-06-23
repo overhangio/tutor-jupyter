@@ -29,6 +29,8 @@ frame_ancestors = [
     "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000",
     "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}",
     "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}:8001",
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ PREVIEW_LMS_HOST }}",
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ PREVIEW_LMS_HOST }}:8000",
 ]
 {% if MFE_HOST is defined %}
 frame_ancestors += [
