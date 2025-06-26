@@ -29,8 +29,6 @@ instructions, because git commits are used to generate release notes:
 
 - [Improvement] Add hatch_build.py in sdist target to fix the installation issues (by @dawoudsheraz)
 
-- 💥[Improvement] Remove preview sites from allowed embedding pages as the preview page has been migrated to the learning MFE. (by @Danyal-Faheem)
-
 - 💥[Feature] Upgrade to teak. (by @Abdul-Muqadim-Arbisoft)
 
 <a id='changelog-19.0.0'></a>
