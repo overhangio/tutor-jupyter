@@ -19,6 +19,18 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-20.0.0'></a>
+## v20.0.0 (2025-06-10)
+
+- 💥[Feature] Renamed the `jupyter-lab-dockerfile` to `jupyterlab-dockerfile` for consistency across the Tutor ecosystem and added the `jupyterhub-dockerfile` patch to the JupyterHub Dockerfile for customization. If you were previously using the patch with the old name, update your configuration to reflect the new name to ensure compatibility. (by @Abdul-Muqadim-Arbisoft)
+
+- [Improvement] Migrate packaging from setup.py/setuptools to pyproject.toml/hatch. (by @Abdul-Muqadim-Arbisoft)
+  - For more details view tutor core PR: https://github.com/overhangio/tutor/pull/1163
+
+- [Improvement] Add hatch_build.py in sdist target to fix the installation issues (by @dawoudsheraz)
+
+- 💥[Feature] Upgrade to teak. (by @Abdul-Muqadim-Arbisoft)
+
 <a id='changelog-19.0.0'></a>
 ## v19.0.0 (2024-12-16)
 
