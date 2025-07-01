@@ -11,7 +11,7 @@ USER jovyan
 # https://github.com/jupyterhub/nbgitpuller
 # https://hub.jupyter.org/nbgitpuller/
 # https://pypi.org/project/nbgitpuller/
-RUN pip install nbgitpuller==1.2.0
+RUN pip install nbgitpuller==1.2.1
 
 # https://pypi.org/project/jupyterlab/
 RUN pip install jupyterlab==4.0.9
