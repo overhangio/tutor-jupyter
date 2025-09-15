@@ -24,8 +24,8 @@ if __version_suffix__:
 config: t.Dict[str, t.Dict[str, t.Any]] = {
     "defaults": {
         "VERSION": __version__,
-        "DOCKER_IMAGE_HUB": "{{ DOCKER_REGISTRY }}overhangio/jupyterhub:{{ JUPYTER_VERSION }}",
-        "DOCKER_IMAGE_LAB": "{{ DOCKER_REGISTRY }}overhangio/jupyterlab:{{ JUPYTER_VERSION }}",
+        "DOCKER_IMAGE_HUB": "{{ DOCKER_REGISTRY }}overhangio/jupyterhub:{{ JUPYTER_VERSION }}",  # noqa: E501
+        "DOCKER_IMAGE_LAB": "{{ DOCKER_REGISTRY }}overhangio/jupyterlab:{{ JUPYTER_VERSION }}",  # noqa: E501
         "HOST": "jupyter.{{ LMS_HOST }}",
         "DEFAULT_PASSPORT_ID": "jupyterhub",
         "LTI_CLIENT_KEY": "openedx",
@@ -52,9 +52,10 @@ hooks.Filters.CONFIG_OVERRIDES.add_items(list(config.get("overrides", {}).items(
 
 def jupyterhub_crypt_key(size: int) -> str:
     """
-    Return a random hex-encoded bytes string of fixed size. This is equivalent to `openssl rand -hex 32`.
+    Return a random hex-encoded bytes string of fixed size.
+    This is equivalent to `openssl rand -hex 32`.
     https://jupyterhub.readthedocs.io/en/stable/reference/authenticators.html#authentication-state
-    """
+    """  # noqa: E501
     return codecs.encode(token_bytes(size), "hex").decode()
 
 
