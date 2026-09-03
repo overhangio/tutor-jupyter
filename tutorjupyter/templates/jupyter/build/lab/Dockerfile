@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/jupyterhub/singleuser/tags
-FROM docker.io/jupyterhub/singleuser:4
+FROM docker.io/jupyterhub/singleuser:5
 
 # Install git for nbgitpuller
 USER root
