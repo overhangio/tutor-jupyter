@@ -1,6 +1,6 @@
 # https://hub.docker.com/r/jupyterhub/jupyterhub/tags
 # Base: https://github.com/jupyterhub/jupyterhub/blob/main/Dockerfile
-FROM docker.io/jupyterhub/jupyterhub:4
+FROM docker.io/jupyterhub/jupyterhub:6
 
 # https://pypi.org/project/dockerspawner/
 # https://pypi.org/project/jupyterhub-kubespawner/
